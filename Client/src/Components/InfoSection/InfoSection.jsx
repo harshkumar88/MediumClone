@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Navbar from "../HomePage/Navbar"
 import { ArrowRight } from 'react-bootstrap-icons';
 import { NavLink, useLocation } from 'react-router-dom';
-
+import '../HomePage/Home'
 const InfoSection=(props)=>{
     const location = useLocation();
     const [email, setEmail] = useState("");
@@ -81,9 +81,8 @@ const InfoSection=(props)=>{
     return (
         <div className='w-100'>
             <Navbar />
-            {check == false ? <div>You have Nothing in your story</div> :
-
-                <div  className={size==false?"container-fluid w-75 ":"container-fluid w-100"} style={{overflow:"hidden"}}>
+            {check == false ? <div className='topMargin'>You have Nothing in your story</div> :
+                <div  className={size==false?"container-fluid w-75 topMargin":"container-fluid w-100 topMargin"} style={{overflow:"hidden"}}>
                     {storyData.map((ele, id) => {
                         return <div key={id} className="mt-4 p-1 w-75 mx-auto  container-fluid"> 
                          <h1>{ele.title}</h1>
