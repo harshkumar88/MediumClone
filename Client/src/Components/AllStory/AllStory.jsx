@@ -45,9 +45,9 @@ const AllStory = () => {
   return (
     <div>
      <Navbar/>
-    {check==false?<div className='mt-5 text-center '><h1>You have Nothing in your story</h1></div>:
+    {check==false?<div className='mt-5 text-center topMargin'><h1>You have Nothing in your story</h1></div>:
 
-    <div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-evenly"}} className="container">
+    <div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-evenly"}} className="container topMargin">
     {storyData.map((ele, id) => {
       return <div key={id} className="mt-4 p-1 w-75 mx-auto  container-fluid"> 
        <h1>{ele.title}</h1>

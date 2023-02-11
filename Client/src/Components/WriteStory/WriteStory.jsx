@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../HomePage/Navbar';
 import Swal from 'sweetalert2'
+import '../HomePage/Home.css'
 const WriteStory = () => {
     const navigate=useNavigate();
     const [StoryData, SetData] = useState({
@@ -10,7 +11,32 @@ const WriteStory = () => {
     });
     const [email,setEmail]=useState("");
     const [name,setName]=useState("");
+    const [size,setSize]=useState(false);
+
+    window.onresize = function () {
+      var viewport_width = window.innerWidth;
+  
+      if (viewport_width <= 700) {
+        setSize(true);
+      }
+      else {
+        setSize(false)
+        
+      }
+    };
+
     useEffect(()=>{
+
+        var viewport_width = window.innerWidth;
+  
+        if (viewport_width <= 700) {
+          setSize(true);
+        }
+        else {
+          setSize(false)
+          
+        }
+
         const email=sessionStorage.getItem("email")
         const name=sessionStorage.getItem("name");
            setEmail(email);
@@ -62,12 +88,12 @@ const WriteStory = () => {
     return (
         <div>
         <Navbar/>
-        <div className='container mt-4'>
+        <div className='container topMargin'>
         
            <form method='POST' onSubmit={SubmitData}>
-            <div className='text-end'>
+            {size==false?<div className='text-end'>
                 <button className='btn btn-success'   type='submit'>Publish</button>
-                </div>
+                </div>:""}
             <div className='text-center mb-5'>
                 <h1>Title of the Story</h1>
                 <div ><input type="text" className='form-control removeOutline' value={StoryData.title} name="title" required onChange={ChangeData} /></div>
@@ -77,6 +103,9 @@ const WriteStory = () => {
                 <h3>Description of Story</h3>
                 <div style={{ height: "300px" }}><textarea type="text" className='form-control h-100 removeOutline' placeholder='Write your story' required value={StoryData.desc}  name="desc" onChange={ChangeData} /></div>
             </div>
+            {size==true?<div className='text-center mt-4'>
+                <button className='btn btn-success'   type='submit'>Publish</button>
+                </div>:""}
             </form>
         </div>
         </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import './Home.css'
 const MiddlePart = () => {
 const [change,setchange]=useState(false);
   useEffect(()=>{
@@ -23,7 +24,7 @@ const [change,setchange]=useState(false);
         })
   }
   return (
-      <div className='container mt-5 w-75 bg-light'>
+      <div className='container  w-75 bg-light topMargin'>
            <h1 style={{fontSize:"6vw"}}>Medium is a Place to write,read, and connect</h1>
 
            <p className='mt-3'>It's easy and free  to post your thinking on any topic and connect with millions of readers</p>

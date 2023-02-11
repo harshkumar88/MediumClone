@@ -1,5 +1,16 @@
 body{
     font-family: 'Noto Sans JP', sans-serif;
     margin: 0px;
-    padding: 0px
+    padding: 0px;
+    background-color: #F8f9fa
+}
+.fixedNav{
+    position: fixed;
+    /* top:-10px */
+    width: 100%;
+    top:0%;
+   
+}
+.topMargin{
+    margin-top: 98px;
 }

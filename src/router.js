@@ -85,7 +85,7 @@ router.post("/LoginData", async (req, res) => {
 
 router.post("/AddStory",async(req,res)=>{
 
-     const {date,title,desc,email,name}=req.body;
+     const {date,title,desc,email,name}=req.body;  
 
      const userdata = await Story.find({});
      const finduser = userdata.find((user) => {

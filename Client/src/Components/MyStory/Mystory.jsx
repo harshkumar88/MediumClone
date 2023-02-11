@@ -5,6 +5,7 @@ import { ArrowRight } from 'react-bootstrap-icons';
 import { TrashFill} from 'react-bootstrap-icons';
 import '../Loader.css'
 import Swal from 'sweetalert2'
+import '../HomePage/Home.css'
 const Mystory = () => {
     const [email,setEmail]=useState("");
     const [check,set]=useState();
@@ -91,9 +92,9 @@ const Mystory = () => {
   return (
     <div>
      <Navbar/>
-    {check==false?<div className='mt-5 text-center ' ><h1>You have Nothing in your story</h1></div>:
+    {check==false?<div className='mt-5 text-center topMargin' ><h1>You have Nothing in your story</h1></div>:
    
-    <div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-evenly"}} className="container">
+    <div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-evenly"}} className="container topMargin">
     {storyData.map((ele, id) => {
       return <div key={id} className="mt-4 p-1 w-75 mx-auto  container-fluid"> 
        <h1>{ele.title}</h1>

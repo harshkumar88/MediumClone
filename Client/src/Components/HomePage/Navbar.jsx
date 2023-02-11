@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import Swal from 'sweetalert2'
+import './Home.css'
 
 const Navbar = () => {
     const navigate=useNavigate();
@@ -43,8 +44,8 @@ const Navbar = () => {
    
    }
   return (
-    <div className='bg-light'>
-                <navbar>
+    <div className='bg-light fixedNav'>
+                <navbar >
                     <nav className="navbar navbar-expand-lg navbar-light">
                         <div className="container-fluid">
                         <NavLink  className="nav-link  anchor" aria-current="page" to="/" style={{fontStyle:"oblique",fontWeight:"bolder",fontSize:"30px"}}>
