@@ -1,0 +1,5 @@
+.removeOutline {
+    border: none;
+    outline: none;
+    background-color: red;
+}

@@ -1,0 +1,40 @@
+
+
+.input:focus { 
+    outline: none !important;
+    border-color: #919396!important ;
+    box-shadow: 0 0 6px #919396 !important;
+ }
+
+.bgset{
+    background-image: url("https://wallpapercave.com/wp/wp4952126.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.dark{
+    color:black;
+    font-weight: 500;
+}
+
+.borderRadius{
+
+    /* border:1px solid black ; */
+    box-shadow: 0 0 5px #919396 !important;
+    background-color: white;
+}
+
+/* 
+.no-outline:focus {
+    background-color: #01020341;
+    outline: none;
+    color:rgba(255, 255, 255, 0.753);
+   
+  } */
+
+  .background{
+    background-image: url("https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+    min-height:100vh ;
+  }
+  .border{
+    border-radius: 10px;
+  }
