@@ -1,3 +1,4 @@
+const bcrypt = require("bcryptjs");
 const mongoose=require("mongoose");
 
 const RegisterSchema=new mongoose.Schema({
@@ -28,6 +29,16 @@ const RegisterSchema=new mongoose.Schema({
     }
 })
 
+RegisterSchema.pre("save",async function(next){
+
+    if(this.isModified("password")){
+    const passwordHash=await bcrypt.hash(this.password,10);
+    this.password=passwordHash;
+    this.confirmpass=passwordHash;
+    console.log(passwordHash)
+    }
+    next();
+})
 
 const StorySchema=new mongoose.Schema({
    

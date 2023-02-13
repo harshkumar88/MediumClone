@@ -5,9 +5,9 @@ import { ArrowRight } from 'react-bootstrap-icons';
 import '../Loader.css'
 const AllStory = () => {
     const [email,setEmail]=useState("");
-    const [check,set]=useState();
+    const [check,set]=useState(false);
     const [storyData,setData]=useState([]);
-    
+    const [text,setText]=useState("Pls Wait.....");
 
     const showStory=async(em)=>{
 
@@ -28,10 +28,14 @@ const AllStory = () => {
                 data.message.map((ele,id)=>{
                   arr.push(ele)
                 })
-                setData(arr);
-                set(true);
-
-                if(arr.length==0)set(false)
+                if(arr.length==0)setText("Oops! Nothing to Show");
+                else{
+               
+                setTimeout(()=>{
+                  setData(arr);
+                    set(true);
+                },1000)
+            }
           
     }
     useEffect(()=>{
@@ -45,7 +49,7 @@ const AllStory = () => {
   return (
     <div>
      <Navbar/>
-    {check==false?<div className='mt-5 text-center topMargin'><h1>You have Nothing in your story</h1></div>:
+    {check==false?<div className='text-center topMargin'><h1>{text}</h1></div>:
 
     <div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-evenly"}} className="container topMargin">
     {storyData.map((ele, id) => {

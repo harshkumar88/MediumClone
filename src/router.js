@@ -5,7 +5,8 @@ const validator = require('validator');
 router.use(bp.json());
 router.use(bp.urlencoded({ extended: true }));
 require("./database.js");
-const { Register, Story } = require("./collections.js")
+const { Register, Story } = require("./collections.js");
+const bcrypt = require('bcryptjs');
 
 router.post("/registerData", async (req, res) => {
     const { username, email, password, confirmpass } = req.body;
@@ -31,21 +32,18 @@ router.post("/registerData", async (req, res) => {
             const register = new Register({
                 username, email, password, confirmpass
             })
-            console.log(register)
+            
             await register.save();
             return res.status(201).json({ message: 'Sucess' })
         }
         catch (e) {
             res.json(e);
         }
-
     }
-
     else {
         return res.status(422).json("");
     }
 })
-
 
 router.post("/LoginData", async (req, res) => {
     const { username, email, password } = req.body;
@@ -56,12 +54,15 @@ router.post("/LoginData", async (req, res) => {
             const finduser = userdata.find((user) => {
                 return user.email === email
             })
+            
 
             if (finduser === undefined) {
-                console.log("a");
                 return res.status(422).json({ error: 'UserNotFound' })
             }
-            else if (finduser.password !== password) {
+
+            const isMatch=await bcrypt.compare(password,finduser.password);
+        
+            if (!isMatch) {
 
                 return res.status(422).json({ error: "passwordincorrect" });
             }
@@ -75,9 +76,7 @@ router.post("/LoginData", async (req, res) => {
             return res.send("error")
 
         }
-        //return res.status(200).json("successfull")
     }
-
     else {
         return res.status(422).json("");
     }
@@ -106,7 +105,6 @@ router.post("/AddStory",async(req,res)=>{
             data.push({"title":title,"desc":desc,date:date,name:name});
 
             const deleteuser=await Story.findOneAndDelete({email:email});
-            console.log(deleteuser)
      }
 
      const story=new Story({
@@ -139,12 +137,9 @@ router.post("/MyStory",async(req,res)=>{
 
            arr.map((ele,id)=>{
                data.push(ele);
-           })
-
-           
+           }) 
     }
 
-    console.log(data)
     return res.status(201).json({ message: data })
     }
     catch(e){
@@ -163,7 +158,6 @@ router.post("/AllStory",async(req,res)=>{
         return user.email!==email
     })
     
-    console.log(email)
     var data=[];
 
        User.map((user)=>{
@@ -171,7 +165,6 @@ router.post("/AllStory",async(req,res)=>{
                data.push(ele);
            })
        })
-     console.log(data)
     return res.status(201).json({ message: data })
     }
     catch(e){
@@ -210,7 +203,6 @@ router.post("/DeleteStory",async(req,res)=>{
         return user.email==email;
     })
 
-     
     var data=[];
     const arr=finduser.StoryData;
      
@@ -223,10 +215,9 @@ router.post("/DeleteStory",async(req,res)=>{
             return ele;
         }
     })
-    console.log(data)
     
-     
     const deleteuser=await Story.findOneAndDelete({email:email});
+
     const story=new Story({
         email,StoryData:data
    })

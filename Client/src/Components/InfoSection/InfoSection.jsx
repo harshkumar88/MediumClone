@@ -9,7 +9,7 @@ const InfoSection=(props)=>{
     const [check, set] = useState(false);
     const [storyData, setData] = useState([]);
     const [size,setSize]=useState(false);
-
+    const [text,setText]=useState("Pls Wait.....");
     window.onresize = function () {
       var viewport_width = window.innerWidth;
   
@@ -34,7 +34,7 @@ const InfoSection=(props)=>{
         console.log(data)
      
         if (data.message == 'error') {
-
+                 setText("You have Nothing in your story");
         }
         else {
             const arr = [];
@@ -51,12 +51,15 @@ const InfoSection=(props)=>{
                     }
                     // arr.push(ele)
                 })
-                console.log(arr);
-                setData(arr);
-                set(true);
-           
-
-           
+                if(arr.length==0)setText("You have Nothing in your story");
+                else{
+               
+                setTimeout(()=>{
+                    setData(arr);
+                    set(true);
+                },1000)
+            }
+                
         }
     }
     useEffect(() => {
@@ -81,7 +84,7 @@ const InfoSection=(props)=>{
     return (
         <div className='w-100'>
             <Navbar />
-            {check == false ? <div className='topMargin'>You have Nothing in your story</div> :
+            {check == false ? <div className=' text-center topMargin'><h1>{text}</h1></div> :
                 <div  className={size==false?"container-fluid w-75 topMargin":"container-fluid w-100 topMargin"} style={{overflow:"hidden"}}>
                     {storyData.map((ele, id) => {
                         return <div key={id} className="mt-4 p-1 w-75 mx-auto  container-fluid"> 

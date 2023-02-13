@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import Navbar from "../HomePage/Navbar"
 import { ArrowRight } from 'react-bootstrap-icons';
 import { NavLink } from 'react-router-dom';
-
+import '../HomePage/Home'
 const Publish=()=>{
     const [email, setEmail] = useState("");
     const [check, set] = useState(false);
     const [storyData, setData] = useState([]);
-
+    const [text,setText]=useState("Pls Wait.....");
     const showStory = async (em) => {
 
         const res = await fetch("/MyStory", {
@@ -22,7 +22,7 @@ const Publish=()=>{
         const data = await res.json();
 
         if (data.message == 'error') {
-
+            setText("You have Nothing in your story");
         }
         else {
             const arr = [];
@@ -30,8 +30,16 @@ const Publish=()=>{
             data.message.map((ele, id) => {
                 arr.push(ele)
             })
-            setData([arr[arr.length - 1]]);
-            set(true);
+
+            if(arr.length==0)setText("You have Nothing in your story");
+                else{
+               
+                setTimeout(()=>{
+                    setData([arr[arr.length - 1]]);
+                    set(true);
+                },1000)
+            }
+           
         }
     }
     useEffect(() => {
@@ -44,9 +52,9 @@ const Publish=()=>{
     return (
         <div className='w-100'>
             <Navbar />
-            {check == false ? <div className='text-center mt-5'>You have Nothing in your story</div> :
+            {check == false ? <div className='text-center topMargin'><h1>{text}</h1></div> :
 
-                <div  className="container-fluid w-75 " style={{overflow:"hidden"}}>
+                <div  className="container-fluid w-75 topMargin" style={{overflow:"hidden"}}>
                     {storyData.map((ele, id) => {
                         return <div key={id} className="mt-4 p-1 w-75 mx-auto  container-fluid"> 
                          <h1>{ele.title}</h1>

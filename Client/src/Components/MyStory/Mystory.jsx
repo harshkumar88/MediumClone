@@ -6,10 +6,12 @@ import { TrashFill} from 'react-bootstrap-icons';
 import '../Loader.css'
 import Swal from 'sweetalert2'
 import '../HomePage/Home.css'
+
 const Mystory = () => {
     const [email,setEmail]=useState("");
-    const [check,set]=useState();
+    const [check,set]=useState(false);
     const [storyData,setData]=useState([]);
+    const [text,setText]=useState("Pls Wait.....");
 
     const showStory=async(em)=>{
 
@@ -24,7 +26,8 @@ const Mystory = () => {
         })
         const data=await res.json();
     
-         if(data.message=='error' || data.message.length==0){
+         if(data.message=='error'){
+          setText("Oops! Nothing to Show");
                set(false);
           }
           else{
@@ -33,8 +36,15 @@ const Mystory = () => {
                 data.message.map((ele,id)=>{
                   arr.push(ele)
                 })
-                setData(arr);
-                set(true);
+              
+                if(arr.length==0)setText("Oops! Nothing to Show");
+                else{
+               
+                setTimeout(()=>{
+                  setData(arr);
+                    set(true);
+                },1000)
+            }
           }
     }
     useEffect(()=>{
@@ -60,11 +70,17 @@ const Mystory = () => {
                 data.message.map((ele,id)=>{
                   arr.push(ele)
                 })
-                setData(arr);
+
+                if(arr.length==0)setText("Oops! Nothing to Show");
+                else{
                
-            if(arr.length==0){
-              set(false);
+                setTimeout(()=>{
+                  setData(arr);
+                    set(true);
+                },1000)
             }
+                
+           
    }
    const getStory=async(ele)=>{
     
@@ -92,7 +108,7 @@ const Mystory = () => {
   return (
     <div>
      <Navbar/>
-    {check==false?<div className='mt-5 text-center topMargin' ><h1>You have Nothing in your story</h1></div>:
+    {check==false?<div className='text-center topMargin' ><h1>{text}</h1></div>:
    
     <div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-evenly"}} className="container topMargin">
     {storyData.map((ele, id) => {
