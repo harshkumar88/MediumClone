@@ -71,13 +71,14 @@ const Mystory = () => {
                   arr.push(ele)
                 })
 
-                if(arr.length==0)setText("Oops! Nothing to Show");
+                if(arr.length==0){setText("Oops! Nothing to Show");
+                 set(false);
+                }
                 else{
                
-                setTimeout(()=>{
-                  setData(arr);
-                    set(true);
-                },1000)
+                setData(arr);
+                set(true);
+                
             }
                 
            
